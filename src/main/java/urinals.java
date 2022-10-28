@@ -1,19 +1,27 @@
 package main.java;
 // Author : Adam Shoaib K
+import java.io.*;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class urinals {
 
     Boolean isValidString(String input) { // checks if the user input is valid
             // check if the given input consists of 1's and 0's
             if (input.matches("^[01]+$")) {
+                if(hasConsequentOnes(input)) {
+                    return false;
+                }
                 return true;
             } else {
                 return false;
             }
+    }
+
+    boolean hasConsequentOnes(String input) {
+        for (int i=0;i<input.length()-1;i++)
+            if (input.charAt(i) == '1' && input.charAt(i+1) == '1')
+                return true;
+        return false;
     }
 
     int countUrinals(String input) { // if the user input is valid this fn returns the no of avail urinals
@@ -53,6 +61,5 @@ public class urinals {
                 System.exit(1);
                 break;
         }
-
     }
 }
