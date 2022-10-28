@@ -105,6 +105,9 @@ public class urinals {
                     ArrayList<String> input = new ArrayList<String>(); // Create an ArrayList object
                     ArrayList<Integer> resultList = new ArrayList<Integer>();
                     while (line != null) {
+                        if(line.equals("-1")) {
+                            break;
+                        }
                         input.add(line);
                         line = br.readLine();
                     }
@@ -119,7 +122,6 @@ public class urinals {
                         } else {
                             // else add -1 to the list and break out of the loop
                             resultList.add(-1);
-                            break;
                         }
                     }
                     ur.writeToAFile(resultList);

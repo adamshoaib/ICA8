@@ -3,6 +3,9 @@ package main.java;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
+import java.util.ArrayList;
+
 class urinalsTest {
 
     @Test
@@ -79,5 +82,46 @@ class urinalsTest {
         Assertions.assertEquals( 2 , ur.countUrinals("0000"));
         Assertions.assertEquals( 1 , ur.countUrinals("01000"));
         Assertions.assertEquals( 0 , ur.countUrinals("1"));
+    }
+
+    @Test
+    void writeToAFile() throws IOException {
+        System.out.println("====== Adam Shoaib K == TEST SEVEN EXECUTED =======");
+        urinals ur = new urinals();
+        ArrayList<Integer> resultList = new ArrayList<Integer>();
+        resultList.add(1);
+        resultList.add(2);
+        resultList.add(3);
+        resultList.add(0);
+        resultList.add(-1);
+        ur.writeToAFile(resultList);
+        int currentCount = 0;
+        String filename = "rule" + ".txt";
+        File fileToCreate = new File(filename);
+        while (fileToCreate.exists()) {
+            currentCount++;
+        }
+        BufferedReader br;
+        String name = currentCount > 0 ? "currentCount" : "";
+        br = new BufferedReader(new FileReader("/Users/adamshoaibk/IdeaProjects/ICA8/src/Output/rule" + name +".txt"));
+        String line = br.readLine();
+        ArrayList<String> input = new ArrayList<String>(); // Create an ArrayList object
+        while (line != null) {
+            input.add(line);
+            line = br.readLine();
+        }
+        ArrayList<Integer> strToInt = getStrToInt(input);
+        boolean boolval = resultList.equals(strToInt);
+        Assertions.assertEquals( true , boolval);
+    }
+
+    private ArrayList<Integer> getStrToInt(ArrayList<String> strArList) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for(String str : strArList) {
+            try {
+                res.add(Integer.parseInt(str));
+            } catch(NumberFormatException nfe) {}
+        }
+        return res;
     }
 }
