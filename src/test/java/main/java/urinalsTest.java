@@ -70,44 +70,14 @@ class urinalsTest {
     void countUrinals() {
         System.out.println("====== Adam Shoaib K == TEST SIX EXECUTED =======");
         urinals ur = new urinals();
-        String ip = "10101";
-        if(ur.isValidString(ip)) {
-            Assertions.assertEquals( 0 , ur.countUrinals(ip));
-        }
-
-        String ip1 = "10001";
-        if(ur.isValidString(ip1)) {
-            Assertions.assertEquals( 1 , ur.countUrinals(ip1));
-        }
-
-        String ip2 = "011";
-        if(ur.isValidString(ip2)) {
-            Assertions.assertEquals( -1 , ur.countUrinals(ip2));
-        }
-
-        String ip3 = "00";
-        if(ur.isValidString(ip3)) {
-            Assertions.assertEquals( 1 , ur.countUrinals(ip3));
-        }
-
-        String ip4 = "11";
-        if(ur.isValidString(ip4)) {
-            Assertions.assertEquals( -1 , ur.countUrinals(ip4));
-        }
-
-        String ip5 = "00000";
-        if(ur.isValidString(ip5)) {
-            Assertions.assertEquals( 3 , ur.countUrinals(ip5));
-        }
-
-        String ip6 = "0000";
-        if(ur.isValidString(ip6)) {
-            Assertions.assertEquals( 2 , ur.countUrinals(ip6));
-        }
-
-        String ip7 = "01000";
-        if(ur.isValidString(ip7)) {
-            Assertions.assertEquals( 1 , ur.countUrinals(ip7));
-        }
+        Assertions.assertEquals( 0 , ur.countUrinals("10101"));
+        Assertions.assertEquals( 1 , ur.countUrinals("10001"));
+        Assertions.assertEquals( -1 , ur.countUrinals("011"));
+        Assertions.assertEquals( 1 , ur.countUrinals("00"));
+        Assertions.assertEquals( -1 , ur.countUrinals("11"));
+        Assertions.assertEquals( 3 , ur.countUrinals("00000"));
+        Assertions.assertEquals( 2 , ur.countUrinals("0000"));
+        Assertions.assertEquals( 1 , ur.countUrinals("01000"));
+        Assertions.assertEquals( 0 , ur.countUrinals("1"));
     }
 }

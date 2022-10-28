@@ -25,29 +25,33 @@ public class urinals {
     }
 
     int countUrinals(String input) { // if the user input is valid this fn returns the no of avail urinals
-        int count = 0;
-        int i = 0;
-        int len = input.length();
-        char[] arr = input.toCharArray();
-        if (len == 1) {
-            return arr[i] == '0' ? 1 : -1;
-        }
-        while (i < len) {
-            if (arr[i] == '0') {
-                if (i == 0 && arr[i + 1] == '0') {
-                    arr[i] = '1';
-                    count++;
-                } else if (i == len - 1 && arr[i - 1] == '0') {
-                    arr[i] = '1';
-                    count++;
-                } else if ((i - 1) >= 0 && (i + 1) < len && arr[i - 1] == '0' && arr[i + 1] == '0') {
-                    arr[i] = '1';
-                    count++;
-                }
+        if(isValidString(input)) {
+            int count = 0;
+            int i = 0;
+            int len = input.length();
+            char[] arr = input.toCharArray();
+            if (len == 1) {
+                return arr[i] == '0' ? 1 : 0;
             }
-            i += 1;
+            while (i < len) {
+                if (arr[i] == '0') {
+                    if (i == 0 && arr[i + 1] == '0') {
+                        arr[i] = '1';
+                        count++;
+                    } else if (i == len - 1 && arr[i - 1] == '0') {
+                        arr[i] = '1';
+                        count++;
+                    } else if ((i - 1) >= 0 && (i + 1) < len && arr[i - 1] == '0' && arr[i + 1] == '0') {
+                        arr[i] = '1';
+                        count++;
+                    }
+                }
+                i += 1;
+            }
+            return count;
+        } else {
+            return -1;
         }
-        return count;
     }
 
     void writeToAFile(ArrayList<Integer> outputList) {
@@ -124,7 +128,7 @@ public class urinals {
                 }
                 break;
             default :
-                System.out.println("Invalid Input !, Please try again Later");
+                System.out.println("Invalid Input ! Please try again Later");
                 System.exit(1);
                 break;
         }
