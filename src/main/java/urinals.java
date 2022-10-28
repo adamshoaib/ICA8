@@ -81,7 +81,7 @@ public class urinals {
         try {
             br = new BufferedReader(new FileReader("/Users/adamshoaibk/IdeaProjects/ICA8/src/Helper/urinal.dat"));
             String line = br.readLine();
-            ArrayList<String> input = new ArrayList<String>(); // Create an ArrayList object
+            ArrayList<String> input = new ArrayList<>(); // Create an ArrayList object
             while (line != null) {
                 if (line.equals("-1")) {
                     break;
@@ -98,32 +98,31 @@ public class urinals {
         }
     }
 
-    public static void main(String args[])  //static method
+    public static void main(String[] args)  //static method
     {
         Scanner Scanner = new Scanner(System.in);
         urinals ur = new urinals();
         System.out.println("Input from ? 1 = Keyboard, 2 = file");
         String choice = Scanner.nextLine();
-        switch(choice) {
-            case "1" :
+        switch (choice) {
+            case "1" -> {
                 System.out.println("Enter Input in 0's and 1's");
                 String userInput = Scanner.nextLine();
                 System.out.println("You inputted :" + userInput);
-                if(ur.isValidString(userInput)) {
+                if (ur.isValidString(userInput)) {
                     int result = ur.countUrinals(userInput);
                     System.out.println("Number of free urinals :" + result);
                 } else {
                     System.out.println("-1");
                 }
-                break;
-            case "2" :
-                BufferedReader br;
+            }
+            case "2" -> {
                 ArrayList<String> input = ur.readFromFile();
-                ArrayList<Integer> resultList = new ArrayList<Integer>();
-                for (int i = 0; i < input.size(); i++) {
+                ArrayList<Integer> resultList = new ArrayList<>();
+                for (String s : input) {
                     // checking if the string is valid
-                    if(ur.isValidString(input.get(i))) {
-                        int result = ur.countUrinals(input.get(i));
+                    if (ur.isValidString(s)) {
+                        int result = ur.countUrinals(s);
                         // add result only if string is valid
                         resultList.add(result);
                     } else {
@@ -132,11 +131,11 @@ public class urinals {
                     }
                 }
                 ur.writeToAFile(resultList);
-                break;
-            default :
+            }
+            default -> {
                 System.out.println("Invalid Input ! Please try again Later");
                 System.exit(1);
-                break;
+            }
         }
     }
 }
