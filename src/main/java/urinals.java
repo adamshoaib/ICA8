@@ -1,4 +1,4 @@
-
+package main.java;
 // Author : Adam Shoaib K
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -6,10 +6,24 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class urinals {
-    Boolean isValidString() {
-        // todo;
-        return true;
+
+    Boolean isValidString(String input) { // checks if the user input is valid
+        try{
+            // check if the given input is a number
+            Double.parseDouble(input);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+
     }
+
+    int countUrinals(String input) { // if the user input is valid this fn returns the no of avail urinals
+        System.out.println("Not yet implemented");
+        return 0;
+    }
+
     public static void main(String args[])  //static method
     {
         Scanner Scanner = new Scanner(System.in);
