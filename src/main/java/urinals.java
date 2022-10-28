@@ -8,10 +8,7 @@ public class urinals {
     Boolean isValidString(String input) { // checks if the user input is valid
             // check if the given input consists of 1's and 0's
             if (input.matches("^[01]+$")) {
-                if(hasConsequentOnes(input)) {
-                    return false;
-                }
-                return true;
+                return !hasConsequentOnes(input);
             } else {
                 return false;
             }
@@ -63,14 +60,14 @@ public class urinals {
             File fileToCreate = new File(filename);
             while (fileToCreate.exists()) {
                 currentCount++;
-                filename = dirPath + file + Integer.toString(currentCount) + ".txt";
+                filename = dirPath + file + currentCount + ".txt";
                 fileToCreate = new File(filename);
             }
             fileToCreate.createNewFile();
             FileWriter fw = new FileWriter(fileToCreate);
 
-            for (int i = 0; i < outputList.size(); i++) {
-                fw.write(outputList.get(i) + "\n");
+            for (Integer integer : outputList) {
+                fw.write(integer + "\n");
             }
             fw.close();
         }

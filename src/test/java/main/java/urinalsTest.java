@@ -12,31 +12,31 @@ class urinalsTest {
     void isValidInputTrueAssertions() {
         System.out.println("====== Adam Shoaib K == TEST ONE EXECUTED =======");
         urinals ur = new urinals();
-        Assertions.assertEquals( true , ur.isValidString("1010"));
-        Assertions.assertEquals( true , ur.isValidString("0"));
-        Assertions.assertEquals( true , ur.isValidString("1"));
-        Assertions.assertEquals( true , ur.isValidString("00"));
-        Assertions.assertEquals( true , ur.isValidString("0101"));
-        Assertions.assertEquals( true , ur.isValidString("000000000"));
+        Assertions.assertTrue( ur.isValidString("1010"));
+        Assertions.assertTrue(  ur.isValidString("0"));
+        Assertions.assertTrue(ur.isValidString("1"));
+        Assertions.assertTrue(  ur.isValidString("00"));
+        Assertions.assertTrue( ur.isValidString("0101"));
+        Assertions.assertTrue( ur.isValidString("000000000"));
     }
 
     @Test
     void isValidInputFalseAssertions() {
         System.out.println("====== Adam Shoaib K == TEST TWO EXECUTED =======");
         urinals ur = new urinals();
-        Assertions.assertEquals( false , ur.isValidString("101120"));
-        Assertions.assertEquals( false , ur.isValidString("1011A0"));
-        Assertions.assertEquals( false , ur.isValidString("/"));
-        Assertions.assertEquals( false , ur.isValidString("A"));
-        Assertions.assertEquals( false , ur.isValidString("a"));
-        Assertions.assertEquals( false , ur.isValidString("9"));
-        Assertions.assertEquals( false , ur.isValidString(""));
-        Assertions.assertEquals( false , ur.isValidString(" "));
-        Assertions.assertEquals( false , ur.isValidString("-1"));
-        Assertions.assertEquals( false , ur.isValidString("-0"));
-        Assertions.assertEquals( false , ur.isValidString("o")); // should not consider letter "o"
-        Assertions.assertEquals( false , ur.isValidString("O")); // should not consider letter "O"
-        Assertions.assertEquals( false , ur.isValidString("I"));
+        Assertions.assertFalse(  ur.isValidString("101120"));
+        Assertions.assertFalse( ur.isValidString("1011A0"));
+        Assertions.assertFalse(  ur.isValidString("/"));
+        Assertions.assertFalse(  ur.isValidString("A"));
+        Assertions.assertFalse( ur.isValidString("a"));
+        Assertions.assertFalse(  ur.isValidString("9"));
+        Assertions.assertFalse(  ur.isValidString(""));
+        Assertions.assertFalse(  ur.isValidString(" "));
+        Assertions.assertFalse(  ur.isValidString("-1"));
+        Assertions.assertFalse(  ur.isValidString("-0"));
+        Assertions.assertFalse( ur.isValidString("o")); // should not consider letter "o"
+        Assertions.assertFalse(  ur.isValidString("O")); // should not consider letter "O"
+        Assertions.assertFalse(  ur.isValidString("I"));
     }
 
     @Test
@@ -61,12 +61,12 @@ class urinalsTest {
     void hasConsequentOnes() {
         System.out.println("====== Adam Shoaib K == TEST FIVE EXECUTED =======");
         urinals ur = new urinals();
-        Assertions.assertEquals( true , ur.hasConsequentOnes("011"));
-        Assertions.assertEquals( true , ur.hasConsequentOnes("111"));
-        Assertions.assertEquals( false , ur.hasConsequentOnes("010"));
-        Assertions.assertEquals( false , ur.hasConsequentOnes("000"));
-        Assertions.assertEquals( false , ur.hasConsequentOnes("1"));
-        Assertions.assertEquals( false , ur.hasConsequentOnes("0"));
+        Assertions.assertTrue(ur.hasConsequentOnes("011"));
+        Assertions.assertTrue( ur.hasConsequentOnes("111"));
+        Assertions.assertFalse(ur.hasConsequentOnes("010"));
+        Assertions.assertFalse( ur.hasConsequentOnes("000"));
+        Assertions.assertFalse(ur.hasConsequentOnes("1"));
+        Assertions.assertFalse(ur.hasConsequentOnes("0"));
     }
 
     @Test
@@ -88,7 +88,7 @@ class urinalsTest {
     void writeToAFile() throws IOException {
         System.out.println("====== Adam Shoaib K == TEST SEVEN EXECUTED =======");
         urinals ur = new urinals();
-        ArrayList<Integer> resultList = new ArrayList<Integer>();
+        ArrayList<Integer> resultList = new ArrayList<>();
         resultList.add(1);
         resultList.add(2);
         resultList.add(3);
@@ -105,22 +105,22 @@ class urinalsTest {
         String name = currentCount > 0 ? "currentCount" : "";
         br = new BufferedReader(new FileReader("/Users/adamshoaibk/IdeaProjects/ICA8/src/Output/rule" + name +".txt"));
         String line = br.readLine();
-        ArrayList<String> input = new ArrayList<String>(); // Create an ArrayList object
+        ArrayList<String> input = new ArrayList<>(); // Create an ArrayList object
         while (line != null) {
             input.add(line);
             line = br.readLine();
         }
         ArrayList<Integer> strToInt = getStrToInt(input);
         boolean boolval = resultList.equals(strToInt);
-        Assertions.assertEquals( true , boolval);
+        Assertions.assertTrue(boolval);
     }
 
     private ArrayList<Integer> getStrToInt(ArrayList<String> strArList) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
+        ArrayList<Integer> res = new ArrayList<>();
         for(String str : strArList) {
             try {
                 res.add(Integer.parseInt(str));
-            } catch(NumberFormatException nfe) {}
+            } catch(NumberFormatException ignored) {}
         }
         return res;
     }
@@ -129,7 +129,7 @@ class urinalsTest {
     void readFromFile() {
         System.out.println("====== Adam Shoaib K == TEST EIGHT EXECUTED =======");
         urinals ur = new urinals();
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         result.add("10001");
         result.add("1001");
         result.add("00000");
@@ -138,7 +138,7 @@ class urinalsTest {
         result.add("011");
         ArrayList<String> input = ur.readFromFile();
         boolean boolval = result.equals(input);
-        Assertions.assertEquals( true , boolval);
+        Assertions.assertTrue(boolval);
     }
 
     }
