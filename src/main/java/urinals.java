@@ -8,15 +8,12 @@ import java.io.IOException;
 public class urinals {
 
     Boolean isValidString(String input) { // checks if the user input is valid
-        try{
-            // check if the given input is a number
-            Double.parseDouble(input);
-            return true;
-        }
-        catch(NumberFormatException e) {
-            return false;
-        }
-
+            // check if the given input consists of 1's and 0's
+            if (input.matches("^[01]+$")) {
+                return true;
+            } else {
+                return false;
+            }
     }
 
     int countUrinals(String input) { // if the user input is valid this fn returns the no of avail urinals
@@ -27,6 +24,7 @@ public class urinals {
     public static void main(String args[])  //static method
     {
         Scanner Scanner = new Scanner(System.in);
+        urinals ur = new urinals();
         System.out.println("Input from ? 1 = Keyboard, 2 = file");
         String choice = Scanner.nextLine();
         switch(choice) {
