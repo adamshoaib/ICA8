@@ -79,6 +79,28 @@ public class urinals {
         }
     }
 
+    ArrayList<String> readFromFile() {
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader("/Users/adamshoaibk/IdeaProjects/ICA8/src/Helper/urinal.dat"));
+            String line = br.readLine();
+            ArrayList<String> input = new ArrayList<String>(); // Create an ArrayList object
+            while (line != null) {
+                if (line.equals("-1")) {
+                    break;
+                }
+                input.add(line);
+                line = br.readLine();
+            }
+            br.close();
+            return input;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static void main(String args[])  //static method
     {
         Scanner Scanner = new Scanner(System.in);
@@ -99,35 +121,20 @@ public class urinals {
                 break;
             case "2" :
                 BufferedReader br;
-                try {
-                    br = new BufferedReader(new FileReader("/Users/adamshoaibk/IdeaProjects/ICA8/src/Helper/urinal.dat"));
-                    String line = br.readLine();
-                    ArrayList<String> input = new ArrayList<String>(); // Create an ArrayList object
-                    ArrayList<Integer> resultList = new ArrayList<Integer>();
-                    while (line != null) {
-                        if(line.equals("-1")) {
-                            break;
-                        }
-                        input.add(line);
-                        line = br.readLine();
+                ArrayList<String> input = ur.readFromFile();
+                ArrayList<Integer> resultList = new ArrayList<Integer>();
+                for (int i = 0; i < input.size(); i++) {
+                    // checking if the string is valid
+                    if(ur.isValidString(input.get(i))) {
+                        int result = ur.countUrinals(input.get(i));
+                        // add result only if string is valid
+                        resultList.add(result);
+                    } else {
+                        // else add -1 to the list and break out of the loop
+                        resultList.add(-1);
                     }
-                    br.close();
-                    // calling count function for  each input value
-                    for (int i = 0; i < input.size(); i++) {
-                        // checking if the string is valid
-                        if(ur.isValidString(input.get(i))) {
-                            int result = ur.countUrinals(input.get(i));
-                            // add result only if string is valid
-                            resultList.add(result);
-                        } else {
-                            // else add -1 to the list and break out of the loop
-                            resultList.add(-1);
-                        }
-                    }
-                    ur.writeToAFile(resultList);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                ur.writeToAFile(resultList);
                 break;
             default :
                 System.out.println("Invalid Input ! Please try again Later");

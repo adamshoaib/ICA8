@@ -124,4 +124,20 @@ class urinalsTest {
         }
         return res;
     }
-}
+
+    @Test
+    void readFromFile() {
+        urinals ur = new urinals();
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("10001");
+        result.add("1001");
+        result.add("00000");
+        result.add("0000");
+        result.add("01000");
+        result.add("011");
+        ArrayList<String> input = ur.readFromFile();
+        boolean boolval = result.equals(input);
+        Assertions.assertEquals( true , boolval);
+    }
+
+    }
