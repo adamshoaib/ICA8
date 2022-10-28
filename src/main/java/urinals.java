@@ -1,10 +1,10 @@
 package main.java;
 // Author : Adam Shoaib K
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class urinals {
-
     Boolean isValidString(String input) { // checks if the user input is valid
             // check if the given input consists of 1's and 0's
             if (input.matches("^[01]+$")) {
@@ -25,8 +25,54 @@ public class urinals {
     }
 
     int countUrinals(String input) { // if the user input is valid this fn returns the no of avail urinals
-        System.out.println("Not yet implemented");
-        return 0;
+        int count = 0;
+        int i = 0;
+        int len = input.length();
+        char[] arr = input.toCharArray();
+        if (len == 1) {
+            return arr[i] == '0' ? 1 : -1;
+        }
+        while (i < len) {
+            if (arr[i] == '0') {
+                if (i == 0 && arr[i + 1] == '0') {
+                    arr[i] = '1';
+                    count++;
+                } else if (i == len - 1 && arr[i - 1] == '0') {
+                    arr[i] = '1';
+                    count++;
+                } else if ((i - 1) >= 0 && (i + 1) < len && arr[i - 1] == '0' && arr[i + 1] == '0') {
+                    arr[i] = '1';
+                    count++;
+                }
+            }
+            i += 1;
+        }
+        return count;
+    }
+
+    void writeToAFile(ArrayList<Integer> outputList) {
+        try {
+            String file = "rule";
+            String dirPath = "/Users/adamshoaibk/IdeaProjects/ICA8/src/Output/";
+            int currentCount = 0;
+            String filename = dirPath + file + ".txt";
+            File fileToCreate = new File(filename);
+            while (fileToCreate.exists()) {
+                currentCount++;
+                filename = dirPath + file + Integer.toString(currentCount) + ".txt";
+                fileToCreate = new File(filename);
+            }
+            fileToCreate.createNewFile();
+            FileWriter fw = new FileWriter(fileToCreate);
+
+            for (int i = 0; i < outputList.size(); i++) {
+                fw.write(outputList.get(i) + "\n");
+            }
+            fw.close();
+        }
+        catch (IOException e) {
+            System.out.println("OOPS! Exception occurred while writing to a file.");
+        }
     }
 
     public static void main(String args[])  //static method
@@ -40,18 +86,39 @@ public class urinals {
                 System.out.println("Enter Input in 0's and 1's");
                 String userInput = Scanner.nextLine();
                 System.out.println("You inputted :" + userInput);
+                if(ur.isValidString(userInput)) {
+                    int result = ur.countUrinals(userInput);
+                    System.out.println("Number of free urinals :" + result);
+                } else {
+                    System.out.println("-1");
+                }
                 break;
-                // call the function here
             case "2" :
                 BufferedReader br;
                 try {
                     br = new BufferedReader(new FileReader("/Users/adamshoaibk/IdeaProjects/ICA8/src/Helper/urinal.dat"));
                     String line = br.readLine();
+                    ArrayList<String> input = new ArrayList<String>(); // Create an ArrayList object
+                    ArrayList<Integer> resultList = new ArrayList<Integer>();
                     while (line != null) {
-                        System.out.println(line);
+                        input.add(line);
                         line = br.readLine();
                     }
                     br.close();
+                    // calling count function for  each input value
+                    for (int i = 0; i < input.size(); i++) {
+                        // checking if the string is valid
+                        if(ur.isValidString(input.get(i))) {
+                            int result = ur.countUrinals(input.get(i));
+                            // add result only if string is valid
+                            resultList.add(result);
+                        } else {
+                            // else add -1 to the list and break out of the loop
+                            resultList.add(-1);
+                            break;
+                        }
+                    }
+                    ur.writeToAFile(resultList);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
