@@ -127,6 +127,7 @@ class urinalsTest {
 
     @Test
     void readFromFile() {
+        System.out.println("====== Adam Shoaib K == TEST EIGHT EXECUTED =======");
         urinals ur = new urinals();
         ArrayList<String> result = new ArrayList<String>();
         result.add("10001");
